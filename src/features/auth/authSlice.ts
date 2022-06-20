@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'app/store';
 import { User } from 'models/user';
 
 export interface LoginPayload {
@@ -45,8 +46,8 @@ const authSlice = createSlice({
 export const authActions = authSlice.actions;
 
 // Selectors
-export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn;
-export const selectIsLoading = (state: any) => state.auth.isLoading;
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
+export const selectIsLoading = (state: RootState) => state.auth.loading;
 
 // Reducer
 

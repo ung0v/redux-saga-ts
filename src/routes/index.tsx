@@ -7,8 +7,6 @@ import { NotFound, PrivateRoute } from 'components/Common';
 import { Button } from '@mui/material';
 import { useAppDispatch } from 'app/hooks';
 import { authActions } from 'features/auth/authSlice';
-import Dashboard from 'features/dashboard';
-import Student from 'features/student';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -22,6 +20,9 @@ function App() {
 
   return (
     <div className="App">
+      <Button variant="contained" color="primary" onClick={() => dispatch(authActions.logout())}>
+        Logout
+      </Button>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route
@@ -31,11 +32,7 @@ function App() {
               <AdminLayout />
             </PrivateRoute>
           }
-        >
-          <Route index element={<Dashboard />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="students" element={<Student />} />
-        </Route>
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

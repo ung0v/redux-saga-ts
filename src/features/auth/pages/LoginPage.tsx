@@ -1,6 +1,14 @@
-import { Box, Button, Container, createTheme, Paper, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  createTheme,
+  Paper,
+  Typography,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useAppDispatch } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import * as React from 'react';
 import { authActions } from '../authSlice';
 
@@ -24,6 +32,8 @@ const MyPaper = styled(Paper)(({ theme }) => ({
 
 export function LoginPage(props: ILoginPageProps) {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector((state) => state.auth.loading);
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
   const handleLogin = () => {
     dispatch(
@@ -42,7 +52,8 @@ export function LoginPage(props: ILoginPageProps) {
         </Typography>
         <Box mt={2}>
           <Button fullWidth variant="contained" color="primary" onClick={handleLogin}>
-            Fake Login
+            {isLoading && <CircularProgress size={20} color="secondary" />}
+            &nbsp; Fake Login
           </Button>
         </Box>
       </MyPaper>
