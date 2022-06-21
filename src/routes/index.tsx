@@ -9,20 +9,8 @@ import { useAppDispatch } from 'app/hooks';
 import { authActions } from 'features/auth/authSlice';
 
 function App() {
-  const dispatch = useAppDispatch();
-  const getAllCity = async () => {
-    const cities = await cityApi.getAll();
-    console.log(cities);
-  };
-  useEffect(() => {
-    getAllCity();
-  }, []);
-
   return (
     <div className="App">
-      <Button variant="contained" color="primary" onClick={() => dispatch(authActions.logout())}>
-        Logout
-      </Button>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route

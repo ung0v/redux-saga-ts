@@ -34,8 +34,6 @@ const authSlice = createSlice({
       state.loading = false;
     },
     logout(state: AuthState) {
-      console.log('kog');
-
       state.isLoggedIn = false;
       state.currentUser = undefined;
     },

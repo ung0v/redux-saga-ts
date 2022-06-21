@@ -9,17 +9,10 @@ import { useAppDispatch } from 'app/hooks';
 import { authActions } from 'features/auth/authSlice';
 import Dashboard from 'features/dashboard';
 import Student from 'features/student';
+import AddEditPage from 'features/student/AddEditPage';
+import ListPage from 'features/student/ListPage';
 
 function App() {
-  const dispatch = useAppDispatch();
-  const getAllCity = async () => {
-    const cities = await cityApi.getAll();
-    console.log(cities);
-  };
-  useEffect(() => {
-    getAllCity();
-  }, []);
-
   return (
     <div className="App">
       <Routes>
@@ -34,7 +27,9 @@ function App() {
         >
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="students" element={<Student />} />
+          <Route path="students" element={<ListPage />} />
+          <Route path="students/add" element={<AddEditPage />} />
+          <Route path="students/:studentId" element={<AddEditPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
