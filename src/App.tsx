@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
-import cityApi from 'api/cityApi';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { LoginPage } from 'features/auth/pages/LoginPage';
 import { AdminLayout } from 'components/Layout';
 import { NotFound, PrivateRoute } from 'components/Common';
-import { Button } from '@mui/material';
-import { useAppDispatch } from 'app/hooks';
-import { authActions } from 'features/auth/authSlice';
+
 import Dashboard from 'features/dashboard';
 import Student from 'features/student';
 import AddEditPage from 'features/student/AddEditPage';
@@ -27,9 +23,11 @@ function App() {
         >
           <Route index element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="students" element={<ListPage />} />
-          <Route path="students/add" element={<AddEditPage />} />
-          <Route path="students/:studentId" element={<AddEditPage />} />
+          <Route path="students" element={<Student />}>
+            <Route index element={<ListPage />} />
+            <Route path="add" element={<AddEditPage />} />
+            <Route path=":studentId" element={<AddEditPage />} />
+          </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

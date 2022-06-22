@@ -25,7 +25,7 @@ import {
 
 export interface DashboardProps {}
 
-const Loading = styled(LinearProgress)(({ theme }) => ({
+export const Loading = styled(LinearProgress)(({ theme }) => ({
   display: 'absolute',
   top: theme.spacing(-2),
   width: '100%',
