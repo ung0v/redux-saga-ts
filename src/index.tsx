@@ -9,6 +9,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ConnectedRouter } from 'connected-react-router';
 import { unstable_HistoryRouter as HistoryRouter, BrowserRouter } from 'react-router-dom';
 import { history } from 'utils';
+import { ToastContext } from 'context/toast';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

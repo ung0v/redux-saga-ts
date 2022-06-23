@@ -3,7 +3,7 @@ export interface Student {
   name: string;
   age: number;
   mark: number;
-  gender: 'male' | 'female';
+  gender: 'male' | 'female' | 'other';
   city: string;
 
   createAt?: number;

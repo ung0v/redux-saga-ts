@@ -1,15 +1,17 @@
 import { ChevronLeft } from '@mui/icons-material';
-import { Box, Button, createTheme, Typography } from '@mui/material';
+import { Box, createTheme, Typography } from '@mui/material';
 import studentApi from 'api/studentApi';
 import { Student } from 'models';
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import StudentForm from './components/StudentForm';
 
 export interface AddEditPageProps {}
 const theme = createTheme();
 
 export default function AddEditPage(props: AddEditPageProps) {
   const { studentId } = useParams<{ studentId: string }>();
+  const navigate = useNavigate();
 
   const isEdit = !!studentId;
 
@@ -26,7 +28,28 @@ export default function AddEditPage(props: AddEditPageProps) {
         console.log('failed to fetch student details');
       }
     })();
-  }, []);
+  }, [studentId]);
+
+  const initialValues: Student = {
+    name: '',
+    age: '',
+    mark: '',
+    gender: 'male',
+    city: '',
+    ...student,
+  } as Student;
+
+  const handleStudentFormSubmit = async (formValues: Student) => {
+    if (isEdit) {
+      await studentApi.update(formValues);
+    } else {
+      await studentApi.add(formValues);
+    }
+
+    // throw new Error('My testing error');
+
+    navigate('/admin/students');
+  };
 
   return (
     <Box>
@@ -41,10 +64,13 @@ export default function AddEditPage(props: AddEditPageProps) {
           <ChevronLeft /> Back to student list
         </Typography>
       </Link>
-      {isEdit ? (
-        <Typography variant="h4">Edit a student</Typography>
-      ) : (
-        <Typography variant="h4">Add new a student</Typography>
+
+      <Typography variant="h4">{isEdit ? 'Edit a student' : 'Add new a student'}</Typography>
+
+      {(!isEdit || Boolean(student)) && (
+        <Box mt={3}>
+          <StudentForm initialValues={initialValues} onSubmit={handleStudentFormSubmit} />
+        </Box>
       )}
     </Box>
   );
