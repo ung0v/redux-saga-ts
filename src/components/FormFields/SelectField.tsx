@@ -39,8 +39,10 @@ export default function SelectField({ name, control, label, disabled, options }:
         onBlur={onBlur}
         value={value}
       >
-        {options.map((option) => (
-          <MenuItem value={option.value}>{option.label}</MenuItem>
+        {options.map((option, index) => (
+          <MenuItem key={index} value={option.value}>
+            {option.label}
+          </MenuItem>
         ))}
       </Select>
       {error?.message && <FormHelperText>{error.message}</FormHelperText>}

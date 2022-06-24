@@ -1,6 +1,7 @@
 import { ChevronLeft } from '@mui/icons-material';
 import { Box, createTheme, Typography } from '@mui/material';
 import studentApi from 'api/studentApi';
+import Toast from 'components/Common/Toast';
 import { Student } from 'models';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';

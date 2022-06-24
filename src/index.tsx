@@ -9,7 +9,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ConnectedRouter } from 'connected-react-router';
 import { unstable_HistoryRouter as HistoryRouter, BrowserRouter } from 'react-router-dom';
 import { history } from 'utils';
-import { ToastContext } from 'context/toast';
+import ToastContainer from 'components/Common/ToastContainer';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -17,10 +17,12 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <HistoryRouter history={history}>
-        <CssBaseline />
-        <App />
-      </HistoryRouter>
+      <ToastContainer>
+        <HistoryRouter history={history}>
+          <CssBaseline />
+          <App />
+        </HistoryRouter>
+      </ToastContainer>
     </Provider>
   </React.StrictMode>
 );

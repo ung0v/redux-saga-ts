@@ -11,6 +11,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { studentSchema } from 'utils';
 import Alert from '@mui/material/Alert';
+import { useContext } from 'react';
+import { ToastContext } from 'context/toast';
 
 export interface StudentFormProps {
   initialValues: Student;
@@ -18,6 +20,7 @@ export interface StudentFormProps {
 }
 
 export default function StudentForm({ initialValues, onSubmit }: StudentFormProps) {
+  const { show } = useContext(ToastContext);
   const [error, setError] = useState<string>('');
 
   const {
@@ -39,9 +42,11 @@ export default function StudentForm({ initialValues, onSubmit }: StudentFormProp
     try {
       setError('');
       await onSubmit?.(formValues);
+      show('SUCESSS');
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
+        show(error.message);
       }
     }
   };

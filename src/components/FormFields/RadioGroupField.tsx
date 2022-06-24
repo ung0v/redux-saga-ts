@@ -34,8 +34,13 @@ export default function RadioGroupField({
     <FormControl margin="normal" error={invalid} disabled={disabled}>
       <FormLabel>{label}</FormLabel>
       <RadioGroup name={name} value={value} onChange={onChange} onBlur={onBlur}>
-        {options.map((option) => (
-          <FormControlLabel value={option.value} control={<Radio />} label={option.label} />
+        {options.map((option, index) => (
+          <FormControlLabel
+            key={index}
+            value={option.value}
+            control={<Radio />}
+            label={option.label}
+          />
         ))}
       </RadioGroup>
       {error?.message && <FormHelperText>{error.message}</FormHelperText>}
